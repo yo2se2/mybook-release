@@ -1,0 +1,10 @@
+<img class="hero-slide"src="/assets/book1.jpg" alt="">
+<div>
+<% if user_signed_in? %>  
+    <%= link_to "投稿する", books_new_path %>
+<% end %>
+    <%= link_to "みんなの投稿", books_favorite_path %>
+</div>
+
+
+

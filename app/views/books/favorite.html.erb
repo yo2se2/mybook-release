@@ -1,0 +1,14 @@
+<div class="tweets-container">
+  <% @books.each do |t| %>
+    <div class="tweet">
+      <%= image_tag t.image_url, size: "250x200" if t.image? %>
+      <%= t.user.name %>
+      <%= t.body %>
+      <%= t.created_at %>
+      <%= link_to "詳細へ", book_path(t.id) %>
+      <%= link_to "編集する", edit_book_path(t.id) %>
+      <%= link_to "削除する", book_path(t.id), method: :delete %>
+    
+    </div>
+  <% end %>
+</div>

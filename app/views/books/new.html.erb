@@ -1,0 +1,20 @@
+<div class="post-form">
+  <!-- railsのコードをhtmlに反映させる。-->
+  <p class="form-title">投稿フォーム</p>
+    <%= form_for @book do |f| %>
+      <div class="title">
+        <%= f.label :題目 %>
+        <%= f.text_field :name, :size => 50 %>
+      </div>
+      <div class="field">
+        <%= f.label :投稿内容 %>
+        <%= f.text_area :body, :size => 70 %>
+      </div>
+      <div class="field">
+        <%= f.label :image %>
+        <%= f.file_field :image %>
+      </div>
+      
+      <%= f.submit "投稿する" %>
+    <% end %>        
+</div>

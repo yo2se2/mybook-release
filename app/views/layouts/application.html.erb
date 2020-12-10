@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mybook</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Kameron:wght@400;700&family=Noto+Sans+JP&display=swap" rel="stylesheet">
+  </head>
+    <header class="header">
+      <div class="header__title">
+          <span class="logo_My">My</span>
+          <span class="logo_Bookss">Books</span>
+      </div>
+  
+      <nav>
+          <ul class="header__ul">
+              <li class="header__li"><%= link_to 'Home', books_index_path %></li>
+              <% if user_signed_in? %>  
+                <li class="header__li"><%= link_to 'Mypage' , user_path(current_user.id) %></li>
+                <li class="header__li"><%= link_to 'logout' , destroy_user_session_path, method: :delete %></li>
+              <% else %>
+                <li class="header__li"><%= link_to 'Login', user_session_path %></li>
+              <% end %>
+              
+          </ul>
+      </nav>
+  </header>
+
+  <body>
+  
+    <%= yield %>
+  </body>
+</html>
