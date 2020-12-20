@@ -3,6 +3,11 @@
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
 
+
+
+// hero-header
+
+
  //投稿フォーム
 .post-form{
         
@@ -12,6 +17,7 @@
     transform:translate(-50%,-50%);
     width:50%;
     height:50%;
+    min-height:200px;
     border:2.0px solid #d3def1;
     background-color: #d3def1;
     z-index:30;
@@ -23,6 +29,7 @@ font-size: 32px;
 font-weight: bold;
 margin-top:10px;
 margin-bottom: 10px;
+
 }
 
 
@@ -49,4 +56,18 @@ height:60px
 .hero-slide{
     height:300px;
     width:60%;
+}
+
+
+.books{
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
+    align-items:center;      
+    
+    & .right-container{
+        display:flex;
+        flex-direction:column; 
+      
+    }
 }

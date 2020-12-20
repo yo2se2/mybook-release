@@ -50,10 +50,14 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 
-
+#画像投稿
 gem 'carrierwave'
 gem 'cloudinary'
 
 gem 'dotenv-rails'
 
+#ログイン機能
 gem 'devise'
+
+#ページ上限
+gem 'kaminari'

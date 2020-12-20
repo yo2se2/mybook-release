@@ -1,5 +1,15 @@
 <%= form_for @book do |f| %>
-  <%= f.label :body %>
-  <%= f.text_field :body, :size => 140 %> 
+  <div class="title">
+        <%= f.label :題目 %>
+        <%= f.text_field :name, :size => 50 %>
+      </div>
+      <div class="field">
+        <%= f.label :投稿内容 %>
+        <%= f.text_area :body, :size => 70 %>
+      </div>
+      <div class="field">
+        <%= f.label :image %>
+        <%= f.file_field :image %>
+      </div>
   <%= f.submit "編集する" %>
 <% end %>

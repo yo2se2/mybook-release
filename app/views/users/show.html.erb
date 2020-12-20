@@ -1,18 +1,99 @@
 <h1>users#show</h1>
-<p>名前 : <%= @user.name %></p>
-<p>メールアドレス : <%= @user.email %></p>
-<p>プロフィール : <%= @user.profile %></p>
+
+<div class="show-container">
+<div class="profile-container">
+  <div class="main-container">
+    <div class="left-container">
+      <% if @user.image? %>
+        <%= image_tag @user.image_url, size: "250x200" %>
+      <% else %>
+        <%= image_tag "/assets/default_icon.png", size: "250x200"%>
+      <% end %>
+    </div>
+    <div class="right-container">
+      <div class="right-child name"><h3>Name</h3>  <%= @user.name %></div>
+      <div class="right-child belong"><h3>Belongs</h3>  <%= @user.name %></div>
+      <div class="right-child email"><h3>mail</h3> <%= @user.email %></div>
+    </div>
+
+  </div>
+  <hr width="70%">
+
+  <div class="sub-container">
+    <h1>Profile</h1>
+    <% if @user.profile.present?%>
+      <p class="profile">プロフィール : <%= @user.profile %></p>
+    <% else %>
+      <p>自分のプロフィールを入力しよう</p>
+    <% end %>
+  </div>
+</div>
+
+
+
+
 
 <% if current_user.id == @user.id %>
   <%= link_to "編集する", edit_user_registration_path %>
 <% end %>
 
-<h2>ユーザーの投稿一覧</h2>
-<% @user.books.each do |t| %>
-  <%= image_tag t.image_url, size: "250x200" if t.image? %>  
-  <%= t.user.name %>
-  <%= t.body %>
-<% end %>
+
+<h2 class="title">My Psot</h2>
+ <hr width="80%">
+<div class="books-container">
+
+  <% if @user.books.exists? %>
+    <% @user.books.each do |t| %>
+      <div class="books">
+        <div class="left-container">
+          <%= image_tag t.image_url, size: "250x200" if t.image? %>
+        </div>
+        <div class="right-container">
+
+  
+          <div class="right-child title"><h3>Title</h3><%= t.name %></div>
+          <div class="right-child content"><h3>Content</h3><%= t.body %></div>
+          <div class="right-child detail">
+            <%= t.user.name %>
+            <%= t.created_at %>
+            <%= link_to "詳細へ", book_path(t.id) %>
+            <%= link_to "編集する", edit_book_path(t.id) %>
+            <%= link_to "削除", book_path(t.id), method: :delete%>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% else %> <!-- 投稿がない場合の処理 -->
+    <h6> 投稿はありません。</h6>
+  <% end %>
+</div>
 
 
+<h2 class="title">Favorite</h2>
+ <hr width="80%">
 
+<div class="books-container">
+  <% @user.liked_books.each do |t| %>
+    <div class="books">
+      <div class="left-container">
+        <%= image_tag t.image_url, size: "250x200" if t.image? %>
+      </div>
+      <div class="right-container">
+          <div class="right-child title"><h3>Title</h3><%= t.name %></div>
+          <div class="right-child content"><h3>Content</h3><%= t.body %></div>
+          <div class="right-child detail">
+          <%= t.user.name %>
+          <%= t.created_at %>
+          <%= link_to "詳細へ", book_path(t.id) %>
+          <%= link_to "編集する", edit_book_path(t.id) %>
+          <%= link_to "削除", book_path(t.id), method: :delete%>
+        </div>
+          <i class="far fa-heart"></i><%= t.likes.count %>
+          <i class="far fa-comment"></i><%= t.comments.count%>
+      </div>
+    
+    </div>
+  <% end %>
+</div>
+<%= link_to "本一覧に戻る", books_favorite_path %>
+</div>

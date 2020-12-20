@@ -1,6 +1,112 @@
-<div class="tweet">
-  <p><%= @book.body %></p>
-  <p><%= @book.created_at %></p>
+<%= @avg_rate %>
+<div class="container">
+    <div class="books">
+      <div class="left-container">
+        <%= image_tag @book.image_url, size: "250x200" if @book.image? %>
+      </div>
+      <div class="right-container">
+        <div class="right-child title"><%= @book.name %></div>
+        <div id="rate-average-<%= @book.id %>"></div>
+            <script>
+            $('#rate-average-<%= @book.id %>').raty({
+              size: 36,
+              starOff:  '<%= asset_path('star-off.png') %>',
+              starOn : '<%= asset_path('star-on.png') %>',
+              starHalf: '<%= asset_path('star-half.png') %>',
+              half: true,
+              readOnly: true,
+              score: <%= @avg_rate %>,
+            });
+            </script>          
+        <div class="right-child content"><%= @book.body %></div>
+        <div class="right-child detail">
+          <%= @book.user.name %>
+          <%= @book.created_at %>
+        </div>
+        <% if user_signed_in? %>
+          <% if current_user.already_liked?(@book) %>
+            <%= link_to book_like_path(@book), method: :delete do %>
+              <i class="fas fa-heart"></i><%= @book.likes.count %>
+            <% end %>
+          <% else %>
+            <%= link_to book_likes_path(@book), method: :post do %>
+              <i class="far fa-heart"></i><%= @book.likes.count %>
+            <% end %>
+          <% end %>
+        <% else %>
+          <i class="far fa-heart"></i><%= @book.likes.count %>
+        <% end %>
+
+      </div>
+    </div>
+  <div class="comment-container">
+    <p class = title>コメント一覧</p> 
+    <div class="comment">
+      <% @comments.each do |c| %>
+        <div class='user_comment'>
+          <!-- ???  -->
+          <%= c.user.name unless c.user.blank? %>
+          <br>
+          <h6>
+          <!--星評価 読み取り専用-->
+          <div id="star-rate-<%= c.id %>"></div>
+            <script>
+            $('#star-rate-<%= c.id %>').raty({
+              size: 36,
+              starOff:  '<%= asset_path('star-off.png') %>',
+              starOn : '<%= asset_path('star-on.png') %>',
+              starHalf: '<%= asset_path('star-half.png') %>',
+              half: true,
+              readOnly: true,
+              score: <%= c.rate %>,
+            });
+            </script>  
+          <!--/星評価-->
+          <%= c.rate %>点
+          </h6>
+          <%= c.content %>
+          <%= button_to "削除", "/books/#{@book.id}/comments/#{c.id}", method: :delete%>
+        </div>
+          <br>
+          
+      <% end %> 
+  
+
+      <% if user_signed_in? %>
+      <h2>口コミを投稿</h2>
+
+        <!--   commentがbook   -->
+        <%= form_with(model:[@book,@comment], local: true) do |f| %>  
+
+          <!-- 評価 -->
+          <div id="star"> 
+            <%= f.label :rate,'評価', class:'col-md-3 col-form-label' %>
+            <%= f.hidden_field :rate, id: :review_star %>
+          </div>
+
+          <!-- 評価javascript -->
+          <script>
+            $('#star').raty({
+              size     : 36,
+              starOff:  '<%= asset_path('star-off.png') %>',
+              starOn : '<%= asset_path('star-on.png') %>',
+              starHalf: '<%= asset_path('star-half.png') %>',
+              scoreName: 'comment[rate]',
+              half: true,
+            });
+          </script>       
+
+          <%= f.text_area :content %>
+          <%= button_tag type: "submit" do %>
+            <i class="far fa-comments"></i> コメントする
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  
 </div>
+
+
 
 <%= link_to "本一覧に戻る", books_favorite_path %>
