@@ -1,14 +1,7 @@
-<div class="favorite-container">
-<%= link_to "ランキング", books_ranking_path %>
-<%= link_to "ランキング2", books_ranking2_path %>
-<%= link_to "ランキング3", books_ranking3_path %>
 <div class="books-container">
   <h2 class="title h2">Recommended Book</h2>
   <hr>
-  <% @books.each do |t| %>
-
-  <%= Comment.where(book_id: t.id).average(:rate) %>
-  <%= t.id %>
+  <% @star_rank.each do |t| %>
     <div class="books">
       <div class="left-container">
         <%= image_tag t.image_url, size: "250x250" if t.image? %>
@@ -54,7 +47,4 @@
     </div>
   <% end %>
 
-</div>
-<%= page_entries_info @books %>
-<%= paginate @books %>
 </div>

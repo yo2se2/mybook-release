@@ -61,3 +61,6 @@ gem 'devise'
 
 #ページ上限
 gem 'kaminari'
+
+#データベースを[rails c]で見やすく
+gem 'pry-rails'

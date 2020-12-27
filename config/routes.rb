@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get 'books/favorite' => 'books#favorite'
   get 'books/ranking' => 'books#ranking'
   get 'books/ranking2' => 'books#ranking2'
+  get 'books/ranking3' => 'books#ranking3'
   resources :books
 
   resources :books do

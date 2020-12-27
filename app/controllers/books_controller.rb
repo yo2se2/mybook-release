@@ -11,15 +11,28 @@ class BooksController < ApplicationController
         # @books_like = Book.where(id: book_liked_ids)
 
         @like_rank = Book.find(Like.group(:book_id).order('count(book_id) desc').limit(5).pluck(:book_id))
-        
+    end    
     def ranking2
         @comment_rank = Book.find(Comment.group(:book_id).order('count(book_id) desc').limit(5).pluck(:book_id))
     end
+
+    def ranking3
+        #星評価の更新
+        @book = Book.all
+        @book.each do |t|
+            if Comment.where(book_id: t.id).present?
+                @book.find(t.id).update(star_rate: Comment.where(book_id: t.id).average(:rate))
+                
+            else
+                @book.find(t.id).update(star_rate: 0)
+            end
+        end
+        #星評価のランキング
+        @star_rank = Book.order('star_rate desc').limit(5)
     end
 
     def favorite
         @books = Book.all.page(params[:page]).per(3)
-
     end 
 
    
@@ -37,7 +50,6 @@ class BooksController < ApplicationController
         else
             redirect_to :action => "new"
         end
-
     end
    
 
@@ -49,7 +61,12 @@ class BooksController < ApplicationController
         @comments = @book.comments
         #新しいコメントを入れるための変数
         @comment = Comment.new
-        @avg_rate = @book.comments.average(:rate).round(1)
+        if @book.comments.present?
+            @avg_rate = @book.comments.average(:rate).round(1)           
+        else
+            @avg_rate = 0
+        end
+       
 
     end
 
@@ -75,7 +92,6 @@ class BooksController < ApplicationController
    
     private
         def book_params
-
             params.require(:book).permit(:body, :image, :name)
         end
 
