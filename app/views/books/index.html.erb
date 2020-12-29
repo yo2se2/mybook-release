@@ -1,3 +1,5 @@
+ <%= javascript_pack_tag 'application' %>
+ <%= stylesheet_pack_tag 'swiper.min.css'%>
   <div id="content">
                 <div class="hero">
                     <div class="swiper-container">
@@ -7,17 +9,17 @@
                             
                             <div class="swiper-slide">
                                 <div class="hero__title">Enjoy Rich</div>
-                                <img src="assets/book3.jpg">
+                                <img src="assets/book1.jpg">
                              
                             </div>
                             
                             <div class="swiper-slide">
                                 <div class="hero__title">Enjoy Rich</div>
-                                <img src="assets/book3.jpg">
+                                <img src="assets/book2.jpg">
                             </div>
                             <div class="swiper-slide">
                                 <div class="hero__title">Enjoy Rich</div>
-                                <img src="assets/book2.jpg">
+                                <img src="assets/book3.jpg">
                             </div>
 
                         </div>
@@ -46,3 +48,6 @@
 
 
 
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css">
+<script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
+<%= javascript_pack_tag 'vender/hero-slider'%>

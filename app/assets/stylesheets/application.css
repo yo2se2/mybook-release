@@ -18,14 +18,7 @@
  *
  */
 
- @import './modules/swiper.min';
- @import './modules/variables.scss';
- @import './mixin';
- @import './hero-slider.scss'; 
 
-
- @import './books';
- @import './users';
 
  *{
     padding:0;

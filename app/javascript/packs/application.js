@@ -7,7 +7,7 @@
 require('jquery');
 require("raty-js");
 //vender直下のswiper.min.jsを読み込む
-require("./vender/swiper.min")
+require("./hero-slider/swiper.min")
 require("@rails/ujs").start();
 require("@rails/activestorage").start();
 require("channels");
