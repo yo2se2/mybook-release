@@ -1,20 +1,25 @@
 <div class="post-form">
-  <!-- railsのコードをhtmlに反映させる。-->
-  <p class="form-title">投稿フォーム</p>
-    <%= form_for @book do |f| %>
-      <div class="title">
-        <%= f.label :題目 %>
-        <%= f.text_field :name, :size => 50 %>
-      </div>
-      <div class="field">
-        <%= f.label :投稿内容 %>
-        <%= f.text_area :body, :size => 70 %>
-      </div>
-      <div class="field">
-        <%= f.label :image %>
-        <%= f.file_field :image %>
-      </div>
-      
-      <%= f.submit "投稿する" %>
-    <% end %>        
+  <div class="post-form__inner">
+    <div class="Post-form__text">
+      <h2 class="main-title">Post Form</h2>
+      <div class="sub-title">あなたのおすすめの一冊を投稿しましょう。</div>
+    </div>
+    <div class="Post-form__content">
+      <%= form_for @book do |f| %>
+        <div class="title">
+          <h2 class="main-title">Title</h2>
+          <%= f.text_field :name, :size => 50, :placeholder => "本の名前を教えてください。" %>
+        </div>
+        <div class="field">
+          <h2 class="main-title">content</h2>
+          <%= f.text_area :body, :size => 70, :placeholder =>"おすすめ，魅力的な点を教えてください。" %>
+        </div>
+        <div class="field">
+          <%= f.label :image %>
+          <%= f.file_field :image %>
+        </div>
+      <%= f.submit "投稿する" ,class: "btn"%>
+      <% end %>  
+    </div>
+  </div>      
 </div>

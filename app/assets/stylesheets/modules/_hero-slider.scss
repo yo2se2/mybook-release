@@ -59,6 +59,7 @@ $cWhite:white;
 }
 
 .hero{
+    overflow:hidden;
     &__title{
         position:absolute;
         top:50%;
@@ -78,7 +79,7 @@ $cWhite:white;
         bottom:20px;
         transform:translateX(-50%);
         z-index:2;
-        width:22px;
+        width:30px;
         height:68px;
     }
 
@@ -95,9 +96,9 @@ $cWhite:white;
         position:absolute;
         transform:rotate(90deg);
         color:$cWhite;
-        left:-8px;
-        top:11px;
-        font-size:1.2em;
+        left:-10px;
+        top:15px;
+        font-size:0.9em;
         color:rgba(255,255,255,0.7)
     }
 }

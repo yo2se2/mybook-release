@@ -1,0 +1,45 @@
+$cSubTitle: #535353;
+$cBgGray: #eaebe6;
+
+//簡易設定
+
+.content-width{
+    width:90%;
+    margin:0 auto;
+    max-width:1070px;
+}
+
+.flex {
+    display: flex;
+    flex-direction: column;
+}
+
+
+//投稿フォーム
+.post-form{     
+    @extend .content-width;
+    background-color: $cBgGray;
+
+    &__inner{
+        align-items:center;
+        
+    }
+}
+
+//投稿フォームのサイズ調整
+input[type="text"] {
+    width: 80%;
+    height: 20px;
+}
+
+input[type="submit"] {
+    width: 200px;
+    font-size: 20px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+textarea{
+    width:80%;
+    height:60px
+}

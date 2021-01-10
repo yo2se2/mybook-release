@@ -1,56 +1,40 @@
-@import  url('modules/swiper.min.css');
-@import url('modules/hero-slider.scss');
+@import 'modules/hero-slider.scss';
 
+
+
+@import 'modules/text-animation';
+@import 'modules/image-slide';
+@import 'modules/mobile-menu';
+@import 'modules/button';
+@import "breakpoints/book-index";
+@import "breakpoints/book-new";
 // Place all the styles related to the books controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+$contentMaxWidth:1070px;
+
+#container{
+    transition: transform 10,box-shadow 0.5s;    
+}
+  
+
+
+.books-container{
+    width:80%;
+    min-width:600px;
+}
+
 
 // hero-header
 $cWhite:white;
 
- //投稿フォーム
-.post-form{
-        
-    position:absolute;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
-    width:50%;
-    height:50%;
-    min-height:200px;
-    border:2.0px solid #d3def1;
-    background-color: #d3def1;
-    z-index:30;
-    text-align: center;
-}
-.form-title{
 
-font-size: 32px;
-font-weight: bold;
-margin-top:10px;
-margin-bottom: 10px;
 
+.favorite-container{
+    padding-top:100px;
 }
 
 
-
-//投稿フォームのサイズ調整
-input[type="text"] {
-width: 95%;
-height: 20px;
-}
-
-input[type="submit"] {
-width: 200px;
-font-size: 20px;
-margin-top: 20px;
-margin-bottom: 30px;
-}
-
-textarea{
-width:95%;
-height:60px
-}
 
 //画像サイズ
 .hero-slide{
@@ -58,16 +42,24 @@ height:60px
     width:60%;
 }
 
-
+//投稿本のスタイル
 .books{
     display:flex;
     flex-direction:row;
     justify-content:center;
-    align-items:center;      
+    align-items:center; 
+    width:80%;     
     
     & .right-container{
         display:flex;
         flex-direction:column; 
       
     }
+    & .right-content{
+        word-wrap:break-word;
+    }
 }
+
+//index の画面デザイン
+
+

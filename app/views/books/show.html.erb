@@ -27,11 +27,11 @@
         </div>
         <% if user_signed_in? %>
           <% if current_user.already_liked?(@book) %>
-            <%= link_to book_like_path(@book), method: :delete do %>
+            <%= button_to book_like_path(@book), method: :delete do %>
               <i class="fas fa-heart"></i><%= @book.likes.count %>
             <% end %>
           <% else %>
-            <%= link_to book_likes_path(@book), method: :post do %>
+            <%= button_to book_likes_path(@book), method: :post do %>
               <i class="far fa-heart"></i><%= @book.likes.count %>
             <% end %>
           <% end %>

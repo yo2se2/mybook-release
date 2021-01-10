@@ -4,11 +4,14 @@
     <title>Mybook</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Kameron:wght@400;700&family=Noto+Sans+JP&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css">
 
     <!-- 遼太郎さんの-->
     <script type="text/javascript">
@@ -17,28 +20,76 @@
 
  
   </head>
-    <header class="header">
-      <div class="header__title">
-          <span class="logo_My">My</span>
-          <span class="logo_Bookss">Books</span>
-      </div>
-  
-      <nav>
-          <ul class="header__ul">
-              <li class="header__li"><%= link_to 'Home', books_path %></li>
-              <% if user_signed_in? %>  
-                <li class="header__li"><%= link_to 'Mypage' , user_path(current_user.id) %></li>
-                <li class="header__li"><%= link_to 'logout' , destroy_user_session_path, method: :delete %></li>
-              <% else %>
-                <li class="header__li"><%= link_to 'Login', user_session_path %></li>
-              <% end %>
-              
-          </ul>
+    
+<body>
+  <div id="global-container">
+    <div id="container">   
+        <div id="content">
+            <div class="mobile-menu__cover"></div>
+            <!-- headerのスクロールを検知するための空div-->
+            <div class="nav-trigger"></div>
+            <header class="header">
+                <div class="header__inner">
+                    <div class="logo">
+                        <img src="">
+                        <span class="logo__my">My</span>
+                        <span class="logo__Book">Book</span>
+                    </div>
+                    <nav class="header__nav">
+                        <ul class="header__ul">
+                            <li class="header__li"><%= link_to 'Home', books_path %></li>
+                        <% if user_signed_in? %>  
+                            <li class="header__li"><%= link_to 'Mypage' , user_path(current_user.id) %></li>
+                            <li class="header__li"><%= link_to 'logout' , destroy_user_session_path, method: :delete %></li>
+                        <% else %>
+                            <li class="header__li"><%= link_to 'Login', user_session_path %></li>
+                        <% end %>
+                        </ul>
+                    </nav>
+                    <button class="mobile-menu__btn">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </header>
+                <%= yield %>
+        </div>
+    </div>
+        
+     <nav class="mobile-menu">
+        <div class="logo">
+          <img src="" alt="" class="logo__img" />
+          <span class="logo__my">My</span>
+          <span class="purple">Book</span>
+        </div>
+        <ul class="mobile-menu__main">
+          <li class="mobile-menu__item">
+            <a class="mobile-menu__link" href="#">
+              <span class="main-title">Service</span>
+              <span class="sub-title">サイトについて</span>
+            </a>
+          </li>
+          <li class="mobile-menu__item">
+            <%= link_to books_path do %>
+              <span class="main-title">Ranking</span>
+              <span class="sub-title">私たちについて</span>
+            <% end %>
+            </a>
+          </li>
+          <li class="mobile-menu__item">
+            <a class="mobile-menu__link" href="">
+              <span class="main-title">HOME</span>
+              <span class="sub-title">ホーム画面</span>
+            </a>
+          </li>
+        </ul>
       </nav>
-  </header>
-
-  <body>
-  
-    <%= yield %>
-  </body>
+</div>
+</body>
+<script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
+<%= javascript_pack_tag 'vender/scroll-polyfill'%>
+<%= javascript_pack_tag 'libs/scroll'%>
+<%= javascript_pack_tag 'libs/text-animation'%>
+<%= javascript_pack_tag 'libs/mobile-menu'%>
 </html>

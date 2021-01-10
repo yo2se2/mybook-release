@@ -9,25 +9,25 @@
   </div>
 
   <div class="field">
-    <%= f.label :name %><br />
+    <h3>お名前</h3>
     <%= f.text_field :name, autofocus: true %>
   </div>
 
   <div class="field">
-    <%= f.label :email %><br />
+    <h3>メールアドレス</h3>
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
   </div>
 
   <div class="field">
-    <%= f.label :password %>
+    <h3>パスワード</h3>
     <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <em>(<%= @minimum_password_length %>文字以上)</em>
     <% end %><br />
     <%= f.password_field :password, autocomplete: "new-password" %>
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation %><br />
+    <h3>パスワード再確認</h3>
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 

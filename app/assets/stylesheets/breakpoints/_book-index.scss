@@ -1,0 +1,361 @@
+$cWhite: white;
+$cBlack: black;
+$cSubTitle: #535353;
+$cBgGray: #eaebe6;
+$cWineRed: #904669;
+$contentMaxWidth: 1070px;
+$navHeight: 100px;
+
+
+
+
+.font-sm{
+    font-size:14px;
+}
+
+.font-md {
+    font-size:17px;
+}
+
+.font-lr{
+    font-size:17px;
+}
+
+.font-lg {
+    font-size:25px;
+}
+
+.mb-sm{
+    margin-bottom:16px !important;
+}
+
+.mb-lg{
+    margin-bottom:80px !important;
+}
+
+.pb-sm{
+    padding-bottom:16px !important;
+}
+
+.pd-lg{
+    padding-bottom:80px !important;
+}
+
+.content-width{
+    width:90%;
+    margin:0 auto;
+    max-width:1070px;
+}
+.main-title {
+    @extend .font-lg;
+    font-weight: 600;
+    margin-bottom: 0;
+    display: block;
+}
+
+#main-content {
+    position: relative;
+    z-index: 0;
+    padding-top:50px;
+  }
+
+.sub-title {
+    @extend .font-sm;
+    color: $cSubTitle;
+}
+.flex {
+    display: flex;
+    flex-direction: column;
+}
+.purple{
+    color:$cWineRed;
+}
+
+
+main {
+    position: relative;
+    z-index: -1;
+}
+#content{
+    padding-top:100px;
+}
+
+// headerのスタイル
+.logo {
+    font-size: 38px;
+    display: flex;
+  }
+.header {
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100px;
+
+    z-index:10;
+
+    &.triggered{
+        background-color:rgba(255,255,255,0.9);
+        box-shadow: 10px 0 25px -10px rgba(0,0,0,0.5);
+    }
+    background-color:transparent;
+    display:flex;
+    align-items:center;
+    &__inner{
+        width:90%;
+        margin:0 auto;
+        max-width:1070px;
+        
+        display:flex;
+        justify-content: space-between;
+        align-items:center;
+    }
+
+    &__title{
+        margin-left:40px;
+    }
+
+    &__ul{
+        display:flex;
+        align-items:center;
+        padding:0;
+        margin:0;
+        list-style:none;
+    }
+
+    &__li{
+        color:black;
+        padding:0;
+        margin:10px;
+        margin-right: 40px;
+        font-size:23px;
+        & > a{
+            color: black;
+            text-decoration: none !important;
+            text-align: center;
+        }
+    }
+    // デスクトップサイズの時のみ表示
+    &__nav{
+        display:none;
+    }
+  }
+//mobile-menuのスタイル
+
+
+
+
+
+  
+.mybooks,
+.regist,
+.post{
+    @extend .content-width;
+    position: relative;
+
+    &__inner{
+        @extend .flex;
+        justify-content:space-between;
+        padding:15px;
+        background-color:$cBgGray;
+        position:relative;
+        z-index:1;
+    }
+
+    &__title{
+        position:relative;
+      
+    }
+    &__img {
+        height: 300px;
+        @extend .mb-sm;
+        transition: box-shadow 1ms linear 0.8s;
+    
+        & > img {
+          position: relative;
+          z-index: -1;
+          //親要素の縦横１００％で画像がフィットする
+          object-fit: cover;
+          width: 100%;
+          height: 100%;
+        }
+        &.inview {
+            box-shadow: inset 0 0 30px black;
+          }
+        }
+    &__sub{
+        @extend .mb-sm;
+    }
+
+}
+
+.regist,
+.post{
+    &__inner{
+        background-color:white;
+        flex-direction:column-reverse;
+    }
+
+}
+
+
+//footerのデザイン
+.footer{
+    @extend .content-width;
+    background-color:$cBgGray;
+    &__inner{
+        @extend .flex;
+        justify-content: space-between;
+        align-items: center;
+        text-align: center;
+    }
+
+    & .logo, &__copyright{
+        flex-basis: 47%;
+    }
+}
+
+//mobil-menuのスタイル
+#container {
+    transition:transform 0.5s,box-shadow 0.5s;
+    background-color:white;
+    position:relative;
+    z-index:2;
+}
+
+.mobile-menu {
+    position: fixed;
+    right: 0;
+    top: 60px;
+    width: 300px;
+
+    &__btn {
+        background-color: unset;
+        border: none;
+        outline: none !important;
+        cursor: pointer;
+    
+        & > span {
+            background-color: $cBlack;
+            width: 35px;
+            height: 2px;
+            display: block !important;
+            margin-bottom: 9px;
+            transition: transform 0.7s;
+    
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+    &__cover {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.3);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 1s;
+        cursor: pointer;
+    }
+    &__main {
+        padding: 0;
+        perspective: 2000px;
+        transform-style: preserve-3d;
+    }
+    &__item {
+        list-style: none;
+        display: block;
+        transform: translate3d(0, 0, -1000px);
+        padding: 0 40px;
+        transition: transform 0.3s, opacity 0.2s;
+        opacity: 0;
+    }
+    &__link {
+        display: block;
+        margin-top: 30px;
+        color: $cBlack;
+        text-decoration: none;
+    }
+}
+//JavaScriptでクラス付与
+.menu-open {
+    & #container {
+        transform: translate(-300px, 60px);
+        box-shadow: 0 8px 40px -10px rgba(0, 0, 0, 0.8);
+    }
+    
+    & .mobile-menu {
+
+        & .logo{
+            padding:0 40px;
+            font-size:35px;
+        }
+        &__cover {
+            opacity: 1;
+            visibility: visible;
+            z-index:200;
+        }
+        &__item {
+            transform: none;
+            opacity: 1;
+
+            @for $i from 1 through 5 {
+                &:nth-child(#{$i}) {
+                    transition-delay: $i * 0.07s;
+                }
+            }
+        }
+        &__btn {
+            & > span {
+                background-color: $cBlack;
+    
+                &:nth-child(1) {
+                    transition-delay: 70ms;
+                    transform: translateY(11px) rotate(135deg);
+                }
+                &:nth-child(2) {
+                    transition-delay: 0s;
+                    transform:  translateX(-18px) scaleX(0);
+                }
+                &:nth-child(3) {
+                    transition-delay: 140ms;
+                    transform: translateY(-11px) rotate(-135deg);
+                }
+            }
+        }
+    }
+}
+//レスポンシブルデザインの設定
+@media (min-width:600px){
+
+    @import "breakpoints/600up";
+}
+
+
+@media (min-width:960px){
+    @import "breakpoints/960up";
+    .mobile-menu {
+        &__btn {
+            display: none;
+        }
+    }
+    .logo{
+        font-size: 48px;
+      }
+}
+
+@media (min-width:1280px){
+    @import "breakpoints/1280up";
+}
+
+@media (min-resolution: 192dpi)
+      ,(-webkit-min-device-pixel-ratio: 2) {
+  @import "breakpoints/2x";
+}
+
+@media print {
+  @import "breakpoints/print";
+}
