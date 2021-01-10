@@ -32,11 +32,11 @@ class BooksController < ApplicationController
     end
 
     def favorite
-        @books = Book.all.page(params[:page]).per(10)
+        @books = Book.all.page(params[:page]).per(3)
         if params[:search] == nil
-        @books= Book.all.page(params[:page]).per(10)
+        @books= Book.all.page(params[:page]).per(3)
           elsif params[:search] == ''
-            @books= Book.all.page(params[:page]).per(10)
+            @books= Book.all.page(params[:page]).per(3)
           else
             #部分検索
             @books = Book.where("name LIKE ? ",'%' + params[:search] + '%').page(params[:page]).per(10)
@@ -66,7 +66,7 @@ class BooksController < ApplicationController
         @book = Book.find(params[:id])
 
         #bookにアソシエーションで紐づいているコメントを読み込む
-        @comments = @book.comments
+        @comments = @book.comments.all
         #新しいコメントを入れるための変数
         @comment = Comment.new
         if @book.comments.present?
@@ -74,6 +74,8 @@ class BooksController < ApplicationController
         else
             @avg_rate = 0
         end
+
+        @comments = @book.comments.all.page(params[:page]).per(10)
        
 
     end

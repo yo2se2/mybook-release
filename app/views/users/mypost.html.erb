@@ -1,0 +1,35 @@
+<h2 class="title">My Psot</h2>
+ <hr width="80%">
+<div class="books-container">
+
+  <% if @user_post.exists? %>
+    <% @user_post.each do |t| %>
+      <div class="books">
+        <div class="left-container">
+          <% if t.image? %>
+            <%= image_tag t.image_url, size: "250x250" if t.image? %>
+          <% else %>
+            <%= image_tag "/assets/book4", size: "250x200"%>
+          <% end %>
+        </div>
+        <div class="right-container">
+
+  
+          <div class="right-child title"><h3>Title</h3><%= t.name %></div>
+          <div class="right-child content"><h3>Content</h3><%= t.body %></div>
+          <div class="right-child detail">
+            <%= t.user.name %>
+            <%= t.created_at %>
+            <%= link_to "詳細へ", book_path(t.id) %>
+            <%= link_to "編集する", edit_book_path(t.id) %>
+            <%= link_to "削除", book_path(t.id), method: :delete%>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% else %> <!-- 投稿がない場合の処理 -->
+    <h6> 投稿はありません。</h6>
+  <% end %>
+</div>
+<%= page_entries_info @user_post %>
+<%= paginate @user_post %>

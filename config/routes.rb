@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     get "sign_out", :to => "users/sessions#destroy" 
   end
   get 'users/:id' => 'users#show' , as: "user"
-  
+  get 'users/:id/mypost' => 'users#mypost' ,as: "user_post"
   
 
  
@@ -21,9 +21,9 @@ Rails.application.routes.draw do
   # 順番変えただけでエらーはく
   root 'books#index'
   get 'books/favorite' => 'books#favorite'
-  get 'books/ranking' => 'books#ranking'
-  get 'books/ranking2' => 'books#ranking2'
-  get 'books/ranking3' => 'books#ranking3'
+  get 'books/good_rank' => 'books#ranking'
+  get 'books/comment_rank' => 'books#ranking2'
+  get 'books/star_rank' => 'books#ranking3'
   resources :books
 
   resources :books do
