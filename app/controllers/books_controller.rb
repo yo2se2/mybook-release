@@ -34,13 +34,13 @@ class BooksController < ApplicationController
     def favorite
         @books = Book.all.page(params[:page]).per(3)
         if params[:search] == nil
-        @books= Book.all.page(params[:page]).per(3)
-          elsif params[:search] == ''
             @books= Book.all.page(params[:page]).per(3)
-          else
-            #部分検索
+        elsif params[:search] == ''
+            @books= Book.all.page(params[:page]).per(3)
+        else
+        #部分検索
             @books = Book.where("name LIKE ? ",'%' + params[:search] + '%').page(params[:page]).per(10)
-          end
+        end
     end 
 
    
@@ -96,7 +96,7 @@ class BooksController < ApplicationController
     def destroy
         book = Book.find(params[:id])
         book.destroy
-        redirect_to action: :index         
+        redirect_to action: :show         
     end
 
    

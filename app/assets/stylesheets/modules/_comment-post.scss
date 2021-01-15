@@ -1,0 +1,99 @@
+.pb-sm{
+    padding-bottom:16px !important;
+}
+.font-md {
+    font-size:17px;
+}
+.content-width{
+    width:90%;
+    margin:0 auto;
+    max-width:1070px;
+}
+
+.flex {
+    display: flex;
+    flex-direction: column;
+}
+
+.comment-view{
+    text-align: center;
+    padding-bottom:20px;
+    position:relative;
+
+}
+.comment-btn{
+
+    outline:0;
+    font-size:1.3em;
+    display:relative;
+    
+}
+.close-btn{
+    position:absolute;
+    right:5px;
+    top:10px;
+}
+
+
+.comment-post{
+    display:none;
+    @extend .content-width;
+    background-color:gray;
+    padding-top:20px;
+    padding-bottom:30px;
+    position: fixed;
+    right: 0;
+    top: 50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    z-index:1000;
+    &.post-inview{
+        animation: tooltipShow 0.4s linear 0s;
+        display:block;
+
+    }
+    &__texts{
+        width:80%;
+
+    }
+    &__inner{
+        @extend .flex;
+        align-items:center;
+   
+    & .form-content{
+        width:100%;
+
+    } 
+
+    & .star-content{
+        padding-bottom:20px;
+    }
+    & .post__comment{
+        padding-top:20px;
+    }
+    & .form-content{
+        height:140px;
+    }
+
+    & .eva {
+        @extend .font-md;
+        font-weight:bold;
+    }
+ }
+
+
+}
+
+.post-space{
+    height:100px;
+}
+
+
+@keyframes tooltipShow {
+    from{
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}

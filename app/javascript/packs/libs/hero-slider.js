@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
     hero.start();
 });
 
-console.log(1)
+
 class HeroSlider {
     constructor(el) {
         this.el = el;

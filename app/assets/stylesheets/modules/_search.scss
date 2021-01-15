@@ -1,0 +1,36 @@
+.search-container{
+  position:relative;
+  border: 1px solid #999;
+  display:block;
+  padding:3px 10px;
+  border-radius:20px;
+  height:2.5em !important;
+  width:80%;
+  max-width:800px;
+  margin:0 auto;
+  & input[type="text"]{
+    border:none;
+    height:2.0em !important;
+    &:focus{
+        outline: 0;      
+      }     
+  }
+
+
+}
+
+.search-btn {
+    cursor:pointer;
+    font-family:FontAwesome;
+    border:none;
+    background:none;
+    color: #3879d9;
+    position:absolute;
+    right:0;
+    width:2.5em;
+    height:2.5em;
+    top:-2px;
+    &:focus{
+        outline:0;
+    }
+}

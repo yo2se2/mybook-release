@@ -1,8 +1,5 @@
-<h1>users#show</h1>
 
-<div class="show-container">
 <div class="profile-container">
-  <div class="main-container">
     <div class="left-container">
       <% if @user.image? %>
         <%= image_tag @user.image_url, size: "250x200" %>
@@ -12,94 +9,213 @@
     </div>
     <div class="right-container">
       <div class="right-child name"><h3>Name</h3>  <%= @user.name %></div>
-      <div class="right-child belong"><h3>Belongs</h3>  <%= @user.name %></div>
-      <div class="right-child email"><h3>mail</h3> <%= @user.email %></div>
+      <div class="right-child edit">
+        <% if user_signed_in? %>
+          <% if current_user.id == @user.id %>
+            <%= link_to "編集する", edit_user_registration_path,class: "btn filled" %>
+          <% end %>
+        <% end %>
+      </div>
     </div>
-
-  </div>
-  <hr width="70%">
-
-  <div class="sub-container">
-    <h1>Profile</h1>
-    <% if @user.profile.present?%>
-      <p class="profile">プロフィール : <%= @user.profile %></p>
-    <% else %>
-      <p>自分のプロフィールを入力しよう</p>
-    <% end %>
-  </div>
 </div>
 
 
 
 
 
-<% if current_user.id == @user.id %>
-  <%= link_to "編集する", edit_user_registration_path %>
+
+
+
+
+
+  <% if @user.books.exists? %>
+  <div class="books-container">
+      <h2 class="title animate-title">User Psot</h2>
+      <hr>
+    <% @user.books.each do |t| %>
+      <div class="books">
+        <div class="books__inner">
+          <div class="books__img">
+            <% if t.image? %>
+              <%= image_tag t.image_url  %>
+            <% else %>
+              <div class="no-image"><span class="purple">No</span><span>Image</span></div>
+              <%= image_tag "/assets/book4"%>
+            <% end %>       
+          </div>
+          <div class="books__texts">
+            <div class="title">
+              <h3 class="purple">作品名</h3>       
+            </div>
+            <div class="books_content">
+              <h2>「<%= t.name %>」</h2>         
+            </div>
+            <div class="star__rate">
+              <div class="sub-title">
+                <h3>投稿に対する評価</h3>
+              </div>
+              <% if Comment.where(book_id: t.id).average(:rate).present? %>
+                <div id="rate-average-<%= t.id %>"></div>
+                  <script>
+                  $('#rate-average-<%= t.id %>').raty({
+                    size: 36,
+                    starOff:  '<%= asset_path('star-off.png') %>',
+                    starOn : '<%= asset_path('star-on.png') %>',
+                    starHalf: '<%= asset_path('star-half.png') %>',
+                    half: true,
+                    readOnly: true,
+                    score: <%= Comment.where(book_id: t.id).average(:rate) %>,
+                  });
+                  </script>
+              <% else %>
+              <h5 class="sub-title books__content">評価がありません</h5>
+              <% end %>        
+            </div>          
+            <div class="right-child detail">
+            
+              <%= link_to "詳細", book_path(t.id),{class: "link-btn btn filled"} %>
+              <% if user_signed_in? %>
+                <% if current_user.id == @user.id %> 
+                  <div class="del-edit-btn">
+                    <button class="edit-btn">
+                      <%= link_to  edit_book_path(t.id)  do%>
+                        <i class="far fa-edit"></i>
+                      <% end %>
+                    </button>
+                    <button class="delete-btn">
+                      <%= link_to  book_path(t.id), {method: :delete} do%>
+                        <i class="far fa-trash-alt"></i>
+                      <% end %>
+                    </button>
+                  </div>
+                  
+                <% end %>
+              <% end %>
+            </div>
+          </div>  
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <% else %> <!-- 投稿がない場合の処理 -->
+   <div class="books-container">
+    <h2 class="title animate-title"> Post</h2>
+    <hr>
+    <h6 class="no-post"> 投稿はありません。</h6>
+   </div>
+  <% end %>
+
+
+
+<% if @user.liked_books.exists? %>
+  <div class="books-container">
+    <h2 class="title animate-title">Favorite</h2>
+    <hr>
+
+    <% @user.liked_books.each do |t| %>
+      <div class ="contributor">
+          <div class="contributor__inner">            
+            <div class="contribute-name">
+              <!-- userの画像あったらよかった-->
+
+              <h3><span class="min-post">投稿者：</span> <%= link_to t.user.name ,user_path(t.user.id) %></h3>
+            </div>
+            <div class="contribute-time">
+              <%= t.created_at.strftime('%Y年%m月 %d日') %>   
+            </div>
+          </div>
+      </div>
+      <div class="books">
+        <div class="books__inner">
+          <div class="books__img">
+            <% if t.image? %>
+              <%= image_tag t.image_url  %>
+            <% else %>
+              <div class="no-image"><span class="purple">No</span><span>Image</span></div>
+              <%= image_tag "/assets/book4"%>
+            <% end %>       
+          </div>
+          <div class="books__texts">
+            <div class="title">
+              <h3 class="purple">作品名</h3>       
+            </div>
+            <div class="books_content">
+              <h2>「<%= t.name %>」</h2>         
+            </div>
+            <div class="star__rate">
+              <div class="sub-title">
+                <h3>投稿に対する評価</h3>
+              </div>
+              <% if Comment.where(book_id: t.id).average(:rate).present? %>
+                <div id="rate-average-<%= t.id %>-favorite"></div>
+                  <script>
+                    $('#rate-average-<%= t.id %>-favorite').raty({
+                      size: 36,
+                      starOff:  '<%= asset_path('star-off.png') %>',
+                      starOn : '<%= asset_path('star-on.png') %>',
+                      starHalf: '<%= asset_path('star-half.png') %>',
+                      half: true,
+                      readOnly: true,
+                      score: <%= Comment.where(book_id: t.id).average(:rate) %>,
+                    });
+                  </script>
+              <% else %>
+                <h5 class="sub-title books__content">評価がありません</h5>
+              <% end %>        
+            </div>
+              
+            <div class="right-child detail">            
+              <%= link_to "詳細へ", book_path(t.id),{class: "link-btn btn filled"} %>
+            </div>
+          </div>
+
+            <% if user_signed_in? %>
+              <% if current_user.already_liked?(t) %>
+                <%= button_to book_like_path(id: t.id, book_id: t.id), {method: :delete, class: "good-btn"} do %>
+                  <div class="heart-mark">                
+                    <i class="fas fa-heart"></i>
+                    <span class="heart-count"><%= t.likes.count %></span>
+                  </div>
+                  <div class="comment-mark">
+                    <i class="far fa-comment"></i>
+                    <span class="comment-count"><%= t.comments.count%></span>
+                  </div>
+                <% end %>
+              <% else %>
+                  <!-- メソッドが関係しているものはbutton_toで書かないとダメぽい-->
+                <%= button_to book_likes_path(id: t.id, book_id: t.id), {method: :post, class: "good-btn"} do %>
+                  <div class="heart-mark">
+                    <i class="far fa-heart"></i>
+                    <span class="heart-count"><%= t.likes.count %></span>
+                  </div>
+                  <div class="comment-mark">
+                    <i class="far fa-comment regular"></i>
+                    <span class="comment-count"><%= t.comments.count%></span>
+                  </div>
+                <% end %>
+              <% end %>
+            <% else %>
+              <button class="good-btn">
+                <div class="heart-mark">
+                  <i class="far fa-heart"></i>
+                  <span class="heart-count"><%= t.likes.count %></span> 
+                </div>
+                <div class="comment-mark">
+                  <i class="far fa-comment"></i>
+                  <span class="comment-count"><%= t.comments.count%></span>              
+                </div>
+              </button>
+            <% end %>
+        </div>
+      </div>   
+    <% end %>
+  </div>
+<% else %>
+  <div class="books-container">
+    <h2 class="title animate-title">Favorite</h2>
+    <hr>    
+    <h6 class="no-favorite"> お気に入りがありません。</h6>
+  <div>
 <% end %>
 
 
-<h2 class="title">My Psot</h2>
- <hr width="80%">
-<div class="books-container">
-
-  <% if @user.books.exists? %>
-    <% @user.books.each do |t| %>
-      <div class="books">
-        <div class="left-container">
-          <% if t.image? %>
-            <%= image_tag t.image_url, size: "250x250" if t.image? %>
-          <% else %>
-            <%= image_tag "/assets/book4", size: "250x200"%>
-          <% end %>
-        </div>
-        <div class="right-container">
-
-  
-          <div class="right-child title"><h3>Title</h3><%= t.name %></div>
-          <div class="right-child content"><h3>Content</h3><%= t.body %></div>
-          <div class="right-child detail">
-            <%= t.user.name %>
-            <%= t.created_at %>
-            <%= link_to "詳細へ", book_path(t.id) %>
-            <%= link_to "編集する", edit_book_path(t.id) %>
-            <%= link_to "削除", book_path(t.id), method: :delete%>
-          </div>
-        </div>
-      </div>
-    <% end %>
-  <% else %> <!-- 投稿がない場合の処理 -->
-    <h6> 投稿はありません。</h6>
-  <% end %>
-</div>
-
-
-<h2 class="title">Favorite</h2>
- <hr width="80%">
-
-<div class="books-container">
-  <% @user.liked_books.each do |t| %>
-    <div class="books">
-      <div class="left-container">
-        <%= image_tag t.image_url, size: "250x200" if t.image? %>
-      </div>
-      <div class="right-container">
-          <div class="right-child title"><h3>Title</h3><%= t.name %></div>
-          <div class="right-child content"><h3>Content</h3><%= t.body %></div>
-          <div class="right-child detail">
-          <%= t.user.name %>
-          <%= t.created_at %>
-          <%= link_to "詳細へ", book_path(t.id) %>
-          <%= link_to "編集する", edit_book_path(t.id) %>
-          <%= link_to "削除", book_path(t.id), method: :delete%>
-        </div>
-          <i class="far fa-heart"></i><%= t.likes.count %>
-          <i class="far fa-comment"></i><%= t.comments.count%>
-      </div>
-    
-    </div>
-  <% end %>
-</div>
-<%= link_to "本一覧に戻る", books_favorite_path %>
-</div>
-
-<%= link_to "自分の投稿へ", user_post_path%>

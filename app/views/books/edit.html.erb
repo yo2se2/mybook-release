@@ -1,15 +1,27 @@
-<%= form_for @book do |f| %>
-  <div class="title">
-        <%= f.label :題目 %>
-        <%= f.text_field :name, :size => 50 %>
-      </div>
-      <div class="field">
-        <%= f.label :投稿内容 %>
-        <%= f.text_area :body, :size => 70 %>
-      </div>
-      <div class="field">
-        <%= f.label :image %>
-        <%= f.file_field :image %>
-      </div>
-  <%= f.submit "編集する" %>
-<% end %>
+
+<div class="post-form">
+  <div class="post-form__inner">
+    <div class="Post-form__text">
+      <h2 class="main-title">Edit Form</h2>
+
+    </div>
+    <div class="Post-form__content">
+      <%= form_for @book do |f| %>
+        <div class="title">
+              <h2 class="main-title">Title</h2>
+              <%= f.text_field :name, :size => 50 %>
+            </div>
+            <div class="field">
+              <h2 class="main-title">content</h2>
+              <%= f.text_area :body, :size => 70 %>
+            </div>
+            <div class="field">
+              <%= f.label :image %>
+              <%= f.file_field :image %>
+            </div>
+        <%= f.submit "編集する" %>
+      <% end %>
+
+    </div>
+  </div>      
+</div>

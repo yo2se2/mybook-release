@@ -13,23 +13,54 @@ h3.test{
 }
 
 
+.favorite-adjust{
+    height:30px;
+}
 
+.pd-fav{
+    padding-top:70px !important;
+}
 
-
+.star__rate{
+    width:100%;
+}
+.good-btn{
+    font-size:1.5em;
+}
 .mybooks,
 .regist,
-.post{
+.post,
+.books{
     &__inner {
         padding: 50px;
+
     }
+    &__show,
     &__texts,
     &__img {
         flex-basis: 47%;
     }
 
+    &__show{
+        justify-content:space-between;
+    }
+
     &__texts {
         display: flex;
         align-items: flex-end;
+        & >:nth-child(2){
+            margin:0 auto;
+        }
+        & >:nth-child(4){
+            margin:0 auto;
+        }    
+    }
+}
+
+.books{
+    &__texts{
+        display: flex;
+        align-items: flex-start;
     }
 }
 
@@ -43,3 +74,57 @@ h3.test{
         margin-right: 30px;
     }
 }
+
+.good-btn{
+    display:flex;
+}
+.heart-mark{
+    padding-right:20px;
+}
+.comment-mark{
+    display:inline-block;
+    padding-right:20px;
+}
+
+.profile-container{
+    flex-direction:row;
+    justify-content:center;
+    align-items: center;
+    & .right-container{
+        flex-basis: 47%;
+    }
+    & .left-container{
+        flex-basis:47%;
+    }
+}
+
+.comment{
+    &__user{
+        display:flex;
+        flex-direction: row;
+        align-items: center;
+        &-name{
+            font-size:1.7em;
+            margin-left:10px;
+            margin-right:30px;
+        }
+    }
+
+    &__user-eva{
+        display:flex;
+        flex-direction: row;
+        align-items: center;
+    }
+}
+// .ranking{
+//     background-color: #eaebe6;
+//     &__content{
+//         display:flex;
+//         flex-direction: row;
+//     }
+//     &__star,
+//     &__comment,
+//     &__good{
+//         flex-basis: 30%;
+//     }
+// }

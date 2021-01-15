@@ -1,10 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const cb = function(el, isintersecting) {
-        if(isIntersecting) {
-            const ta = new TextAnimation(el);
-            ta.animate()
-        }
-    }
+    //スライドアニメーション
     const _inviewAnimation = function(el, isIntersecting){
         if(isIntersecting) {
             el.classList.add('inview');
@@ -12,6 +7,8 @@ document.addEventListener('DOMContentLoaded', function () {
             el.classList.remove('inview');
         }
     }
+
+    //header
     const header =document.querySelector('header')
     const _navAnimation = function(el, isIntersecting){
         if(isIntersecting) {
@@ -23,7 +20,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const cs = new ScrollObserver('.cover-slide', _inviewAnimation);
     const navTrigger = new ScrollObserver('.nav-trigger',_navAnimation,{once: false});
-    const ta  = new ScrollObserver('.animate-title',cb) ;
+    const vb = new ScrollObserver('.books', _inviewAnimation);
+    const commentContainer = new ScrollObserver('.comment__container',_inviewAnimation)
 
 });
 
@@ -68,20 +66,3 @@ class ScrollObserver {
     }
 }
 
-class TextAnimation {
-    constructor(el) {
-        this.DOM = {};
-        this.DOM.el = el instanceof HTMLElement ? el : document.querySelector(el);
-        this.chars = this.DOM.el.innerHTML.trim().split("");
-        this.DOM.el.innerHTML = this._splitText();
-    }
-    _splitText() {
-        return this.chars.reduce((acc, curr) => {
-            curr = curr.replace(/\s+/, '&nbsp;');
-            return `${acc}<span class="char">${curr}</span>`;
-        }, "");
-    }
-    animate() {
-        this.DOM.el.classList.toggle('inview');
-    }
-}

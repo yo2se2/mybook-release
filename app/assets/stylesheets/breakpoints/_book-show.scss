@@ -1,0 +1,91 @@
+$cBgGray: #eaebe6;
+
+.content-width{
+    width:90%;
+    margin:0 auto;
+    max-width:1070px;
+}
+
+.comment-container{
+    position:relative;
+    @extend .content-width;
+    & > hr{
+        @extend .content-width;
+    }
+    & .title{
+        text-align:center;
+        font-size:30px;
+        
+    }   
+    &-title{
+        display:flex;
+        flex-direction: row;
+        justify-content: center;
+    } 
+}
+
+//コメント一覧
+.comment{
+    margin-top:30px;
+    position:relative;
+    text-align:center;
+    &__container{
+        background-color:$cBgGray;
+        position:relative;
+        margin:0 auto;
+        width:80%;
+        padding:15px;
+    }
+    &__user,
+    &__content{
+        text-align:left;
+
+    }
+
+    &__user{
+        display:flex;
+        flex-direction: row;
+        align-items: center;
+
+        &-name{
+            font-size:1.7em;
+            margin-left:10px;
+            margin-right:30px;
+        }
+    }
+
+}
+.user-profile-img{
+    border-radius: 50%;
+}
+.comment__user-eva{
+    display:flex;
+    flex-direction: column;
+    margin-bottom:16px;
+}
+
+.b-show{
+    text-align:left;
+}
+.star-value{
+    text-align:left;
+}
+
+@media (min-width:600px){
+    @import "breakpoints/600up";
+}
+
+//delete-button
+.comment{
+    & .delete-btn{
+        position:absolute;
+        background-color:$cBgGray ;
+        bottom:10px;
+        right:10px;
+        border:none;
+        font-size:1.3em;
+        & .fa-trash-alt{
+            color:black;
+        }
+    }
+}
