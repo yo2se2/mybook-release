@@ -33,14 +33,14 @@ class BooksController < ApplicationController
 
     def favorite
         #@books = Book.all.page(params[:page]).per(3)
-        @books = Book.all
+        @books = Book.all.order(created_at: :desc)
         if params[:search] == nil
-            @books= Book.all
+            @books= Book.all.order(created_at: :desc)
         elsif params[:search] == ''
-            @books= Book.all
+            @books= Book.all.order(created_at: :desc)
         else
         #部分検索
-            @books = Book.where("name LIKE ? ",'%' + params[:search] + '%').page(params[:page]).per(10)
+            @books = @books.where("name LIKE ? ",'%' + params[:search] + '%').page(params[:page]).per(10)
         end
     end 
 
