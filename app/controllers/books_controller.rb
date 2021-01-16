@@ -97,7 +97,7 @@ class BooksController < ApplicationController
     def destroy
         book = Book.find(params[:id])
         book.destroy
-        redirect_to action: :favorite     
+        redirect_to user_path(current_user.id)     
     end
 
    
