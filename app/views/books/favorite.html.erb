@@ -112,8 +112,7 @@
     <% end %>
   </div>
 
-<%= page_entries_info @books%>
-<%= paginate @books %>
+
 
     <div class="ranking">
       <div class="ranking__text">
@@ -122,20 +121,20 @@
       </div>
       <div class="ranking__content">
         <div class="ranking__star">
-            <h2>星評価</h2>
+            <h2 class="rank-color">星評価</h2>
             <%= link_to  books_star_rank_path do%>
 
               <%= image_tag "/assets/star-rank2" , class: "rank-img"%>  
             <% end %>
         </div>    
         <div class="ranking__comment">
-          <h2>コメント数</h2>
+          <h2 class="rank-color">コメント数</h2>
           <%= link_to  books_comment_rank_path do%>
             <%= image_tag "/assets/talk-1" , class: "rank-img"%>
           <% end %>      
         </div>
         <div class="ranking__good">
-          <h2>いいね数</h2>
+          <h2 class="rank-color">いいね数</h2>
             <%= link_to  books_good_rank_path do%>
               <%= image_tag "/assets/heart-rank2" , class: "rank-img "%>
             <% end %> 

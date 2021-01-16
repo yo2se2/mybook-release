@@ -86,6 +86,13 @@
           </li>
           <% if user_signed_in? %>
           <li class="mobile-menu__item">
+            <%= link_to user_path(current_user.id),class: "mobile-menu__link" do %>
+              <span class="main-title">MyPage</span>
+              <span class="sub-title">マイページ</span>
+            <% end %>
+            </a>
+          </li>
+          <li class="mobile-menu__item">
             <%= link_to  destroy_user_session_path,{method: :delete,class: "mobile-menu__link"} do %>
               <span class="main-title">Log Out</span>
               <span class="sub-title">ログアウト</span>
